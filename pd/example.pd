@@ -1,32 +1,19 @@
 #N canvas 278 235 874 579 10;
 #X declare -path ../assets;
-#X obj 11 57 r showMenu;
-#X obj 142 59 r buttonClicked;
-#N canvas 724 211 640 314 loadAssets 1;
+#X obj 12 59 r buttonClicked;
+#N canvas 724 211 640 314 loadAssets 0;
 #X obj 21 17 loadbang;
 #X obj 21 191 soundfiler;
-#N canvas 0 22 450 300 (subpatch) 0;
-#X array menuSnd_t 991 float 2;
-#X coords 0 0 991 1 200 140 0;
-#X restore 299 44 graph;
-#N canvas 0 22 450 300 (subpatch) 0;
-#X array btnSnd_t 100 float 2;
-#X coords 0 0 1 1 200 140 0;
-#X restore 299 65 graph;
-#N canvas 0 22 450 300 (subpatch) 0;
-#X array ambience_t 100 float 2;
-#X coords 0 0 1 1 200 140 0;
-#X restore 299 128 graph;
 #X text 17 -29 Loadbang bangs when the main patch is opened and loads
 the soundfiles in their respective arrays;
-#X msg 21 44 read -resize ../assets/menuSnd.wav menuSnd_t;
-#X msg 21 65 read -resize ../assets/btnSnd.wav menuSnd_t;
-#X msg 21 86 read -resize ../assets/loop1.wav;
-#X msg 21 107 read -resize ../assets/loop2.wav;
-#X msg 21 128 read -resize ../assets/ambient.wav;
-#X connect 0 0 6 0;
-#X connect 6 0 1 0;
-#X restore 634 95 pd loadAssets;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array btnSnd_t 991 float 2;
+#X coords 0 0 991 1 200 140 0;
+#X restore 299 44 graph;
+#X msg 21 44 read -resize ../assets/btnSnd.wav btnSnd_t;
+#X connect 0 0 4 0;
+#X connect 4 0 1 0;
+#X restore 719 78 pd loadAssets;
 #N canvas 16 213 810 370 masteri 0;
 #X obj 296 183 dac~;
 #N canvas 152 62 495 534 record 0;
@@ -106,14 +93,12 @@ fader;
 #X connect 18 0 14 1;
 #X connect 18 0 13 1;
 #X coords 0 -1 1 1 129 100 2 100 100;
-#X restore 658 355 pd masteri;
-#X obj 658 327 catch~ sumL;
-#X obj 780 329 catch~ sumR;
-#X obj 634 73 declare -path ../assets;
-#X obj 10 100 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#X restore 441 365 pd masteri;
+#X obj 441 337 catch~ sumL;
+#X obj 563 339 catch~ sumR;
+#X obj 719 56 declare -path ../assets;
+#X obj 12 100 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 142 100 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
 #X obj 10 490 cnv 15 70 20 empty empty Author 10 10 0 12 -176974 -262144
 0;
 #X obj 10 512 cnv 15 80 20 empty empty Course 10 10 0 12 -189906 -262144
@@ -132,130 +117,20 @@ fader;
 ;
 #X text 531 510 Information et communication \, spécialité services
 et produits multimédia;
-#X obj 636 136 catch~ aux1;
-#X obj 646 145 catch~ aux2;
-#X obj 656 155 catch~ aux3;
-#X obj 666 165 catch~ aux4;
-#X obj 10 138 tabplay~ menuSnd_t;
-#X obj 142 138 tabplay~ menuSnd_t;
+#X obj 640 363 catch~ aux1;
+#X obj 650 372 catch~ aux2;
+#X obj 660 382 catch~ aux3;
+#X obj 670 392 catch~ aux4;
 #X obj 11 9 cnv 15 850 40 empty empty puredata_examples 20 20 0 20
 -176974 -262144 0;
-#N canvas 492 107 683 701 chan 0;
-#X obj 103 183 tgl 15 0 empty empty mt 2 7 0 10 -260097 -1 -1 0 1;
-#X obj 123 184 vsl 25 90 0 1 0 1 m1 m1r empty 0 -8 0 8 -191407 -1 -1
-8900 1;
-#X obj 17 261 inlet~;
-#X obj 34 358 *~;
-#X obj 111 168 hsl 72 8 0 -1 0 1 m6 m6r empty -2 -6 0 8 -262144 -1
--1 3000 1;
-#X obj 35 413 *~;
-#X obj 77 412 *~;
-#X obj 35 384 + 1;
-#X obj 60 384 * -1;
-#X obj 136 372 *~;
-#X obj 165 371 *~;
-#X obj 68 358 *~;
-#X obj 60 260 inlet~;
-#X obj 192 180 env~;
-#X obj 192 202 - 100;
-#X obj 233 180 env~;
-#X obj 233 202 - 100;
-#X obj 103 211 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 150 57 r musicOn;
+#X obj 150 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 103 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 103 245 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 103 262 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-1;
-#X obj 155 194 vu 12 80 empty empty -1 -8 0 10 -66577 -1 1 0;
-#X obj 193 372 *~;
-#X obj 222 371 *~;
-#X obj 138 404 throw~ aux1;
-#X obj 152 429 throw~ aux2;
-#X obj 217 402 throw~ aux3;
-#X obj 232 426 throw~ aux4;
-#X obj 35 438 throw~ sumL;
-#X obj 77 458 throw~ sumR;
-#X text 80 55 servandobarreiro.es;
-#X text 75 71 servando.hotglue.me;
-#X obj 280 89 tgl 15 0 empty empty mt 2 7 0 10 -260097 -1 -1 0 1;
-#X obj 640 107 tgl 12 0 empty empty vu 2 7 0 10 -4034 -1 -1 0 1;
-#X text 295 26 this is a simple mono/stereo "modular" channel \, it
-can be duplicated and modified \, It sends automatically the audio
-to the "master section". The potentiometers send a variable signal
-to the effects. (color coded) the white h slider is the "panorama"
-\, the orange toggle is the mute button and the white ones are busses
-(1-4) \, the grey vfader sends signal to the "master" and the green
-toggle enables you to visualize the amount of signal that you are sending
-out to the master. the M toggle in the top right corner just duplicates
-the signal from l to R chan (for mono inputs);
-#X text 338 186 busses can also be used to send signal to effects or
-multichannel soundcards or for "pre-fader listening";
-#X obj 227 136 inlet;
-#X obj 111 124 hsl 72 8 0 1 0 1 m6 m6r empty -2 -6 0 8 -159808 -1 -1
-0 1;
-#X obj 111 134 hsl 72 8 0 1 0 1 m6 m6r empty -2 -6 0 8 -257985 -1 -1
-0 1;
-#X obj 111 144 hsl 72 8 0 1 0 1 m6 m6r empty -2 -6 0 8 -258113 -1 -1
-0 1;
-#X obj 111 154 hsl 72 8 0 1 0 1 m6 m6r empty -2 -6 0 8 -4034 -1 -1
-0 1;
-#X obj 2 315 *~ 1;
-#X obj 70 312 *~ 1;
-#X obj 155 179 tgl 12 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
-;
-#X obj 193 231 spigot;
-#X obj 239 232 spigot;
-#X connect 0 0 41 1;
-#X connect 0 0 42 1;
-#X connect 1 0 3 1;
-#X connect 1 0 11 1;
-#X connect 2 0 41 0;
-#X connect 3 0 5 0;
-#X connect 3 0 9 0;
-#X connect 3 0 22 0;
-#X connect 4 0 7 0;
-#X connect 4 0 8 0;
-#X connect 5 0 13 0;
-#X connect 5 0 28 0;
-#X connect 6 0 15 0;
-#X connect 6 0 29 0;
-#X connect 7 0 5 1;
-#X connect 8 0 6 1;
-#X connect 9 0 24 0;
-#X connect 10 0 25 0;
-#X connect 11 0 6 0;
-#X connect 11 0 10 0;
-#X connect 11 0 23 0;
-#X connect 12 0 42 0;
-#X connect 13 0 14 0;
-#X connect 14 0 44 0;
-#X connect 15 0 16 0;
-#X connect 16 0 45 0;
-#X connect 22 0 26 0;
-#X connect 23 0 27 0;
-#X connect 36 0 1 0;
-#X connect 37 0 9 1;
-#X connect 38 0 10 1;
-#X connect 39 0 22 1;
-#X connect 40 0 23 1;
-#X connect 41 0 3 0;
-#X connect 42 0 11 0;
-#X connect 43 0 45 1;
-#X connect 43 0 44 1;
-#X connect 44 0 21 0;
-#X connect 45 0 21 1;
-#X coords 0 -1 1 1 95 170 2 100 110;
-#X restore 11 301 pd chan;
-#X obj 280 57 r musicOn;
-#X obj 280 100 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
-1;
-#X obj 280 138 fileLooper ../assets/loop.wav;
-#X obj 412 59 r playNote;
-#N canvas 882 105 744 724 8bitSynth 1;
+#X obj 150 138 fileLooper ../assets/loop.wav;
+#X obj 282 59 r playNote;
+#N canvas 882 105 744 724 8bitSynth 0;
 #X obj 25 79 inlet;
-#X obj 275 436 outlet~;
+#X obj 293 563 outlet~;
 #X obj 25 187 t l l;
 #X obj 82 216 list length;
 #X obj 82 264 random;
@@ -265,13 +140,12 @@ multichannel soundcards or for "pre-fader listening";
 #X obj 53 348 mtof;
 #X text 14 58 velocity in;
 #X obj 64 134 s 8bit-vel;
-#X obj 371 349 r 8bit-vel;
-#X obj 296 324 +~ 0.2;
-#X obj 296 350 *~ 2000;
-#X obj 296 299 adsr 1 10 200 50 500;
-#X obj 340 406 *~;
-#X obj 275 403 *~;
-#X obj 274 374 vcf~ 3;
+#X obj 389 446 r 8bit-vel;
+#X obj 314 421 +~ 0.2;
+#X obj 314 396 adsr 1 10 200 50 500;
+#X obj 358 533 *~;
+#X obj 293 530 *~;
+#X obj 292 501 vcf~ 3;
 #X obj 150 187 + 20;
 #X obj 150 117 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0
 1;
@@ -425,12 +299,16 @@ multichannel soundcards or for "pre-fader listening";
 #X obj 276 116 waveformResampler ../assets/AKWF_nes_square.wav \$0-table2
 ;
 #X obj 158 384 tabosc4~ \$0-table2;
-#X obj 340 381 adsr 2 30 200 0 500;
-#X obj 296 266 r 8bit-vel;
+#X obj 358 508 adsr 2 30 200 0 500;
+#X obj 314 353 r 8bit-vel;
 #X obj 25 107 t b f;
 #X msg 25 155 list 26 38 50;
 #X obj 150 139 metro 272.727;
-#X connect 0 0 30 0;
+#X obj 314 374 t f f;
+#X obj 367 420 / 127;
+#X obj 314 447 *~ 4000;
+#X obj 314 472 *~;
+#X connect 0 0 29 0;
 #X connect 2 0 6 0;
 #X connect 2 1 3 0;
 #X connect 3 0 5 0;
@@ -439,30 +317,34 @@ multichannel soundcards or for "pre-fader listening";
 #X connect 5 1 4 1;
 #X connect 6 1 7 0;
 #X connect 7 0 8 0;
-#X connect 8 0 22 0;
-#X connect 8 0 27 0;
-#X connect 11 0 28 0;
-#X connect 12 0 13 0;
-#X connect 13 0 17 1;
-#X connect 14 0 12 0;
-#X connect 15 0 16 1;
-#X connect 16 0 1 0;
-#X connect 17 0 16 0;
-#X connect 18 0 30 0;
-#X connect 19 0 32 0;
-#X connect 20 0 18 0;
-#X connect 21 0 32 1;
-#X connect 25 0 26 0;
-#X connect 26 0 23 0;
-#X connect 27 0 17 0;
-#X connect 28 0 15 0;
-#X connect 28 0 15 1;
-#X connect 29 0 14 0;
-#X connect 30 0 31 0;
-#X connect 30 1 10 0;
-#X connect 31 0 2 0;
-#X connect 32 0 20 0;
-#X restore 412 100 pd 8bitSynth;
+#X connect 8 0 21 0;
+#X connect 8 0 26 0;
+#X connect 11 0 27 0;
+#X connect 12 0 34 0;
+#X connect 13 0 12 0;
+#X connect 14 0 15 1;
+#X connect 15 0 1 0;
+#X connect 16 0 15 0;
+#X connect 17 0 29 0;
+#X connect 18 0 31 0;
+#X connect 19 0 17 0;
+#X connect 20 0 31 1;
+#X connect 24 0 25 0;
+#X connect 25 0 22 0;
+#X connect 26 0 16 0;
+#X connect 27 0 14 0;
+#X connect 27 0 14 1;
+#X connect 28 0 32 0;
+#X connect 29 0 30 0;
+#X connect 29 1 10 0;
+#X connect 30 0 2 0;
+#X connect 31 0 19 0;
+#X connect 32 0 13 0;
+#X connect 32 1 33 0;
+#X connect 33 0 35 1;
+#X connect 34 0 35 0;
+#X connect 35 0 16 1;
+#X restore 282 100 pd 8bitSynth;
 #N canvas 492 107 683 701 chan 0;
 #X obj 103 183 tgl 15 0 empty empty mt 2 7 0 10 -260097 -1 -1 0 1;
 #X obj 123 184 vsl 25 90 0 1 0 1 m1 m1r empty 0 -8 0 8 -191407 -1 -1
@@ -570,7 +452,7 @@ multichannel soundcards or for "pre-fader listening";
 #X connect 44 0 21 0;
 #X connect 45 0 21 1;
 #X coords 0 -1 1 1 95 170 2 100 110;
-#X restore 142 301 pd chan;
+#X restore 12 301 pd chan;
 #N canvas 492 107 683 701 chan 0;
 #X obj 103 183 tgl 15 0 empty empty mt 2 7 0 10 -260097 -1 -1 0 1;
 #X obj 123 184 vsl 25 90 0 1 0 1 m1 m1r empty 0 -8 0 8 -191407 -1 -1
@@ -678,7 +560,7 @@ multichannel soundcards or for "pre-fader listening";
 #X connect 44 0 21 0;
 #X connect 45 0 21 1;
 #X coords 0 -1 1 1 95 170 2 100 110;
-#X restore 281 301 pd chan;
+#X restore 151 301 pd chan;
 #N canvas 492 107 683 701 chan 0;
 #X obj 103 183 tgl 15 0 empty empty mt 2 7 0 10 -260097 -1 -1 0 1;
 #X obj 123 184 vsl 25 90 0 1 0 1 m1 m1r empty 0 -8 0 8 -191407 -1 -1
@@ -786,23 +668,20 @@ multichannel soundcards or for "pre-fader listening";
 #X connect 44 0 21 0;
 #X connect 45 0 21 1;
 #X coords 0 -1 1 1 95 170 2 100 110;
-#X restore 412 301 pd chan;
-#X floatatom 495 65 5 0 0 0 - - -;
-#X connect 0 0 7 0;
-#X connect 1 0 8 0;
-#X connect 4 0 3 0;
-#X connect 5 0 3 1;
-#X connect 7 0 23 0;
-#X connect 8 0 24 0;
-#X connect 23 0 26 0;
-#X connect 23 0 26 1;
-#X connect 24 0 32 0;
-#X connect 24 0 32 1;
-#X connect 27 0 28 0;
-#X connect 28 0 29 0;
-#X connect 29 0 33 0;
-#X connect 29 0 33 1;
-#X connect 30 0 31 0;
-#X connect 31 0 34 0;
-#X connect 31 0 34 1;
-#X connect 35 0 31 0;
+#X restore 282 301 pd chan;
+#X floatatom 365 65 5 1 127 0 - - -;
+#X obj 12 138 tabplay~ btnSnd_t;
+#X connect 0 0 6 0;
+#X connect 3 0 2 0;
+#X connect 4 0 2 1;
+#X connect 6 0 31 0;
+#X connect 22 0 23 0;
+#X connect 23 0 24 0;
+#X connect 24 0 28 0;
+#X connect 24 0 28 1;
+#X connect 25 0 26 0;
+#X connect 26 0 29 0;
+#X connect 26 0 29 1;
+#X connect 30 0 26 0;
+#X connect 31 0 27 0;
+#X connect 31 0 27 1;
